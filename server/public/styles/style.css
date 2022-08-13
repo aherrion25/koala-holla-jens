@@ -17,3 +17,23 @@ header{
     height: auto;
     margin: 5px;
 }
+
+table{
+    border-style: double;
+    border-collapse: separate;
+    width: 100%;
+}
+
+th,td{
+    text-align: left;
+    padding: 10px;
+    border-style: double;
+}
+
+tr:nth-child(odd){
+    background-color: #A6DDFF;
+}
+
+.hidden{
+    display: none;
+}

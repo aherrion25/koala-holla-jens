@@ -1,5 +1,6 @@
 
 const express = require('express');
+const pool = require('../modules/pool.js');
 const router = express.Router();
 
 
@@ -58,15 +59,30 @@ const koalaArray = [
 
 // GET
 router.get('/', (req, res) => {
-    res.send(koalaArray);
+    // res.send(koalaArray);
+    const queryText = 'SELECT * FROM "koalas";';
+    pool.query(queryText).then((result) =>{
+        res.send(result.rows)
+    }).catch((error) => {
+        console.log('ERROR in GET /koalas', error);
+        res.sendStatus(500);
+    })
 })
 
 // POST
 router.post('/', (req, res) => {
     const koalaBear = req.body;
-    koalaArray.push(koalaBear);
-    res.send(koalaBear);
-    res.sendStatus(200);
+    const queryText = `
+    INSERT INTO "koalas" ("name", "gender","age","ready_to_transfer","notes")
+    VALUES ($1,$2,$3, $4, $5);
+    `
+   pool.query(queryText,[koalaBear.name, koalaBear.gender, koalaBear.age, koalaBear.ready_to_transfer, koalaBear.notes ])
+   .then((result)=>{
+    res.send(result)
+   }).catch((error) => {
+    console.log('Error was made',error);
+    res.sendStatus(500);
+   })
 })
 
 // PUT

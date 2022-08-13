@@ -7,7 +7,7 @@ CREATE TABLE "koalas"(
 	"notes" varchar(120)
 );
 
-INSERT INTO "koalas" ("name", "gender","age","ready_to_transfer","note")
+INSERT INTO "koalas" ("name", "gender","age","ready_to_transfer","notes")
 VALUES ('Scotty', 'Male', 4, true,'Born in Guatemala'),
 ('Jean', 'Female', 5, true, 'Allergic to lots of lava'),
 ('Ororo', 'Female', 7, false, 'Loves listening to Paula (Abdul)'),

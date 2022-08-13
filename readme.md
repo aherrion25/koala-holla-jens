@@ -2,6 +2,10 @@ This must stop:
 ---------------
 ![Nevar again](https://i.makeagif.com/media/8-22-2014/GO_DT4.gif)
 
+- ready for transfer button we have function that updates whether or not the task is completed with a true or false upon clicking ready.
+- when transfer = false button appears and when transfer = true there is no button to appear. PUT
+
+
 
 Koala Holla
 ===========

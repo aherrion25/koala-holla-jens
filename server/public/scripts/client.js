@@ -4,6 +4,7 @@ $( document ).ready( function(){
   console.log( 'JQ' );
   // Establish Click Listeners
   $('#addButton').on('click', addKoala);
+  $('body').on('click', '.hollaReady', updateTransfer)
   // load existing koalas on page load
   getKoalas();
 
@@ -36,12 +37,19 @@ function getKoalas(){
     console.log(response);
     $('#viewKoalas').empty();
     for(let koalas of response) {
+      let koalaClass = 'hollaReady';
+      if(koalas.ready_to_transfer){
+        koalaClass = 'hidden';
+      }
       $('#viewKoalas').append(`
         <tr>
           <td>${koalas.name}</td>
           <td>${koalas.age}</td>
           <td>${koalas.gender}</td>
-          <td>${koalas.readyForTransfer}</td>
+          <td>${koalas.ready_to_transfer}</td>
+          <td> 
+              <button class="${koalaClass}" data-id="${koalas.id}"> Ready for Transfer</button>          
+          </td>
           <td>${koalas.notes}</td>
         <tr>  
       `)
@@ -52,6 +60,10 @@ function getKoalas(){
   })
   
 } // end getKoalas
+
+function updateTransfer() {
+  console.log('in updateTransfer');
+}
 
 
 
