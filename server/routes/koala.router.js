@@ -1,4 +1,4 @@
-
+const { response } = require("express");
 const express = require('express');
 const pool = require('../modules/pool.js');
 const router = express.Router();
@@ -86,8 +86,26 @@ router.post('/', (req, res) => {
 })
 
 // PUT
-
+router.put('/:id',(req,res)=>{
+const koalasId = req.params.id;
+const queryText = `UPDATE "koalas" SET "ready_to_transfer" = true WHERE "id" = $1;`;
+pool.query(queryText, [koalasId]).then((results) =>{
+    res.send(results);
+}).catch((error) => {
+    console.log('ERROR in PUT /koalas', error);
+    res.sendStatus(500);
+})
+})
 
 // DELETE
-
+router.delete('/:id', (req, res) =>{
+    const koalasId = req.params.id;
+    const queryText = `DELETE FROM "koalas" WHERE "id" = $1;`;
+    pool.query(queryText, [koalasId]).then((results) => {
+        res.send(results);
+    }).catch((error) => {
+        console.log('ERROR in DELETE /koalas', error);
+        res.sendStatus(500);
+    });
+});
 module.exports = router;
